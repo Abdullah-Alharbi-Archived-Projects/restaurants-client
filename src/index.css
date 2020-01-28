@@ -19,7 +19,13 @@ code {
 }
 
 .bg-main {
-  background-color: #ccc;
+  /* background-color: #ccc; */
+  background-image: url("https://images.unsplash.com/photo-1556742205-e10c9486e506?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1050&q=80");
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-origin: border-box;
+  background-attachment: scroll;
   width: 100%;
   top: 0;
   bottom: 0;
@@ -27,6 +33,19 @@ code {
   height: 130vh;
   position: absolute;
   clip-path: polygon(0 0, 100% 0, 100% 77%, 0 100%);
+}
+.bg-main::after {
+  content: "";
+  /* background-color: #27181844; */
+  background: rgb(139, 139, 139);
+  background: linear-gradient(
+    98deg,
+    rgba(139, 139, 139, 0.6965161064425771) 0%,
+    rgba(0, 16, 255, 0.665703781512605) 100%
+  );
+  position: absolute;
+  width: 100%;
+  height: 100%;
 }
 
 /* nav base */
@@ -145,4 +164,9 @@ footer {
   background-color: #cccccc;
   text-align: center;
   padding: 8px;
+}
+
+/* spans */
+#add-restaurant {
+  color: #008cba;
 }

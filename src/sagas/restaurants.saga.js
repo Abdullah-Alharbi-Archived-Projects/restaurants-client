@@ -1,5 +1,6 @@
 import { put, takeEvery, call } from "redux-saga/effects";
 import http from "../services/http.service";
+import { toast } from "react-toastify";
 
 const RESOURCE = "restaurants";
 
@@ -16,12 +17,18 @@ function* fetchRestaurant({ value }) {
 function* postRestaurant({ value }) {
   const data = yield call(http.post, RESOURCE, value.restaurant);
   yield put({ type: "POST_RESTAURANT_ASYNC", value: data.restaurant });
+  toast("Added Restaurant Successfully.", {
+    type: "success"
+  });
   value.push();
 }
 
 function* destroyRestaurant({ value }) {
   yield call(http.destroy, RESOURCE, value);
   yield put({ type: "DESTROY_RESTAURANT_ASYNC", value });
+  toast("Deleted Restaurant Successfully.", {
+    type: "error"
+  });
 }
 
 function* updateRestaurant({ value }) {
@@ -29,6 +36,9 @@ function* updateRestaurant({ value }) {
   yield put({
     type: "UPDATE_RESTAURANT_ASYNC",
     value: data.restaurant
+  });
+  toast("Updated Restaurant Successfully.", {
+    type: "info"
   });
 }
 

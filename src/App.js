@@ -12,6 +12,7 @@ import EditRestaurant from "./pages/edit-restaurant";
 import Item from "./pages/item";
 import AddItem from "./pages/add-item";
 import EditItem from "./pages/edit-item";
+import { ToastContainer } from "react-toastify";
 
 // components
 import AppBar from "./components/AppBar";
@@ -74,6 +75,8 @@ class App extends Component {
           <Route path="/not-found" exact component={NotFound} />
           <Redirect from="*" to="/not-found" />
         </Switch>
+        <ToastContainer />
+
         <Footer />
       </div>
     );

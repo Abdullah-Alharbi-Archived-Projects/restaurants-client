@@ -1,5 +1,6 @@
 import { put, takeEvery, call } from "redux-saga/effects";
 import http from "../services/http.service";
+import { toast } from "react-toastify";
 
 const RESOURCE = "restaurants";
 
@@ -8,6 +9,9 @@ function* postItem({ value }) {
   yield put({
     type: "POST_RESTAURANT_ITEM_ASYNC",
     value: { item: data.item, id: value.id }
+  });
+  toast("Added Item Successfully.", {
+    type: "success"
   });
 }
 
@@ -23,11 +27,17 @@ function* updateItem({ value }) {
     type: "UPDATE_RESTAURANT_ITEM_ASYNC",
     value: { id: value.id, item: value.item, data }
   });
+  toast("Updated Item Successfully.", {
+    type: "info"
+  });
 }
 
 function* destroyItem({ value }) {
   yield call(http.destroy, RESOURCE, `${value.id}/menu/${value.item}/`);
   yield put({ type: "DESTROY_RESTAURANT_ITEM_ASYNC", value });
+  toast("Deleted Item Successfully.", {
+    type: "error"
+  });
 }
 
 export function* watchPostItem() {

@@ -2,6 +2,8 @@ import React, { Component } from "react";
 import { Grid, TextField, Typography, Button } from "@material-ui/core";
 import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
+// import { toast } from "react-toastify";
+
 import "./style.css";
 
 class SignIn extends Component {
@@ -27,7 +29,13 @@ class SignIn extends Component {
       password
     });
 
+    // this.notify();
     history.push("/");
+  };
+
+  notify = () => {
+    // toast("Welcome ");
+    console.log(this.props);
   };
 
   render() {
@@ -124,4 +132,10 @@ const mapDispatchToState = dispatch => {
   };
 };
 
-export default connect(null, mapDispatchToState)(withRouter(SignIn));
+const mapStateToProps = state => {
+  return {
+    user: { firstName: state.user.firstName, lastName: state.user.lastName }
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToState)(withRouter(SignIn));

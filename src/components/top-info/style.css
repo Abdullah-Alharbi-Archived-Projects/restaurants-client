@@ -1,0 +1,33 @@
+.preview-container {
+  margin-top: 55px;
+  display: flex;
+}
+
+.preview-container div {
+  margin-left: 25px;
+}
+
+.center {
+  justify-content: center;
+  align-items: center;
+}
+
+.column {
+  flex-direction: column;
+}
+
+.w-250 {
+  width: 250px;
+}
+
+.mb-25 {
+  margin-bottom: 5px;
+}
+
+.mt-25 {
+  margin-top: 5px;
+}
+
+.w-800 {
+  width: 90%;
+}

@@ -1,34 +1,26 @@
 import React, { Component } from "react";
-// import AppBar from "@material-ui/core/AppBar";
-// import Toolbar from "@material-ui/core/Toolbar";
-// import Typography from "@material-ui/core/Typography";
-// import Button from "@material-ui/core/Button";
-// import IconButton from "@material-ui/core/IconButton";
-// import Drawer from "@material-ui/core/Drawer";
-// import List from "@material-ui/core/List";
-// import ListItem from "@material-ui/core/ListItem";
-// import ListItemIcon from "@material-ui/core/ListItemIcon";
-// import ListItemText from "@material-ui/core/ListItemText";
-// import FilledInput from "@material-ui/core/FilledInput";
+import { Switch, Route, Redirect } from "react-router-dom";
+// pages
+import Home from "./pages/home";
+import SignIn from "./pages/sign-in";
+import SignUp from "./pages/sign-up";
+import About from "./pages/about";
+import NotFound from "./pages/not-found";
+import Restaurant from "./pages/restaurant";
+import AddRestaurant from "./pages/add-restaurant";
+import EditRestaurant from "./pages/edit-restaurant";
+import Item from "./pages/item";
+import AddItem from "./pages/add-item";
+import EditItem from "./pages/edit-item";
 
-import {
-  AppBar,
-  Toolbar,
-  Typography,
-  Button,
-  IconButton,
-  Drawer,
-  List,
-  ListItem,
-  ListItemIcon,
-  ListItemText,
-  FilledInput,
-  Divider
-} from "@material-ui/core";
+// components
+import AppBar from "./components/AppBar";
+import Drawer from "./components/Drawer";
+import Footer from "./components/Footer";
+import { connect } from "react-redux";
+import storage from "./services/localStorage.service";
 
-import MenuIcon from "@material-ui/icons/Menu";
-import HomeIcon from "@material-ui/icons/Home";
-import InfoIcon from "@material-ui/icons/Info";
+import "react-toastify/dist/ReactToastify.css";
 
 class App extends Component {
   state = {
@@ -47,92 +39,52 @@ class App extends Component {
     this.setState({ ...this.state, [side]: open });
   };
 
+  componentDidMount() {
+    const { authenticate, fetchRestaurants } = this.props;
+    fetchRestaurants();
+    const token = storage.getKey("token");
+
+    if (token) authenticate();
+  }
+
   render() {
     return (
       <div className="App">
-        {/* background div */}
-        <div className="bg-main"></div>
+        <AppBar toggleDrawer={this.toggleDrawer} />
+        <Drawer side={this.state.left} toggleDrawer={this.toggleDrawer} />
 
-        <AppBar position="fixed" color="primary">
-          <Toolbar>
-            <IconButton
-              edge="start"
-              style={{ marginRight: 25 }}
-              color="inherit"
-              aria-label="menu"
-              onClick={this.toggleDrawer("left", true)}
-            >
-              <MenuIcon />
-            </IconButton>
-            <Typography variant="h6" style={{ flexGrow: 1 }}>
-              Restaurants
-            </Typography>
-            <Button color="inherit">Sign in</Button>
-            <Button color="inherit">Sign up</Button>
-          </Toolbar>
-        </AppBar>
+        <Switch>
+          <Route path="/" exact component={Home} />
+          <Route path="/sign-in" exact component={SignIn} />
+          <Route path="/sign-up" exact component={SignUp} />
+          <Route path="/about" exact component={About} />
+          <Route path="/restaurant/:id" exact component={Restaurant} />
+          <Route path="/restaurant/:id/edit" exact component={EditRestaurant} />
+          <Route path="/restaurant/:id/item/:item" exact component={Item} />
+          <Route path="/restaurant/:id/add-item" exact component={AddItem} />
+          <Route
+            path="/restaurant/:id/item/:item/edit"
+            exact
+            component={EditItem}
+          />
 
-        <Drawer
-          open={this.state.left}
-          onClose={this.toggleDrawer("left", false)}
-        >
-          <div
-            role="presentation"
-            onClick={this.toggleDrawer("left", false)}
-            onKeyDown={this.toggleDrawer("left", false)}
-          >
-            <List style={{ width: 350 }}>
-              <ListItem button>
-                <ListItemIcon>
-                  <HomeIcon />
-                </ListItemIcon>
-                <ListItemText primary="Home" />
-              </ListItem>
-              <Divider />
-              <ListItem button>
-                <ListItemIcon>
-                  <InfoIcon />
-                </ListItemIcon>
-                <ListItemText primary="About" />
-              </ListItem>
-            </List>
-          </div>
-        </Drawer>
-        {/* header - search */}
+          {/* authenticated routes */}
+          <Route path="/add-restaurant" exact component={AddRestaurant} />
 
-        <header className="main">
-          <Typography variant="h2" component="h1" align="center">
-            Send Your Feedback to Restaurants <br />
-            <span id="add-restaurant">Add Restaurants</span>
-          </Typography>
-          <div className="search-input">
-            {/* need to add search icon */}
-            <FilledInput placeholder="Search ..." />
-          </div>
-        </header>
-
-        {/* all restaurants */}
-        {/* TODO: if user is signed in show add restaurant button */}
-
-        <div className="restaurants">
-          {this.state.restaurants.map(restaurant => {
-            return (
-              <div className="restaurant co-overlay">
-                <div className="overlay">
-                  <div className="text">Hello World</div>
-                </div>
-              </div>
-            );
-          })}
-        </div>
-
-        {/* footer */}
-        <footer>
-          <h3>Copyrights 2020 &copy;</h3>
-        </footer>
+          <Route path="/not-found" exact component={NotFound} />
+          <Redirect from="*" to="/not-found" />
+        </Switch>
+        <Footer />
       </div>
     );
   }
 }
 
-export default App;
+const mapDispatchToProps = dispatch => {
+  return {
+    fetchRestaurants: () => dispatch({ type: "FETCH_RESTAURANTS" }),
+    authenticate: () => dispatch({ type: "IS_AUTHENTICATED" })
+  };
+};
+
+export default connect(null, mapDispatchToProps)(App);

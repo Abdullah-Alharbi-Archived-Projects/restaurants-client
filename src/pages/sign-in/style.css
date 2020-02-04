@@ -1,0 +1,19 @@
+.sign-in-page .MuiOutlinedInput-notchedOutline {
+  border-color: rgb(255, 255, 255) !important;
+  color: #fff !important;
+}
+
+.sign-in-page .MuiFormLabel-root {
+  color: rgb(255, 255, 255) !important;
+}
+
+.sign-in-page .MuiOutlinedInput-notchedOutline:hover {
+  border-color: #fff !important;
+}
+
+.sign-in-page .Mui-focused {
+  color: #fff !important;
+}
+.sign-in-page .MuiInputBase-root {
+  color: #ffffff !important;
+}

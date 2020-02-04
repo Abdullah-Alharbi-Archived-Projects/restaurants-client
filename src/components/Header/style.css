@@ -1,0 +1,51 @@
+.main {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  height: 100vh;
+}
+
+.main h1 {
+  margin-bottom: 18px;
+  color: #fff;
+}
+
+.main input {
+  padding: 12px;
+  width: 500px;
+  font-size: 25px;
+  /* border-radius: 8px; */
+  /* border: none; */
+  /* border-color: #fff; */
+  color: #ffffff !important;
+}
+
+.main .MuiOutlinedInput-notchedOutline {
+  border-color: rgb(255, 255, 255) !important;
+  color: #fff !important;
+}
+
+.main .MuiFormLabel-root {
+  color: rgb(255, 255, 255) !important;
+}
+
+.main svg {
+  color: rgb(255, 255, 255) !important;
+}
+
+.main .MuiOutlinedInput-notchedOutline:hover {
+  border-color: #fff !important;
+}
+
+.main .Mui-focused {
+  color: #fff !important;
+}
+
+.search-input {
+  width: 600px;
+}
+
+.main .MuiAutocomplete-inputRoot[class*="MuiOutlinedInput-root"] {
+  padding: 3px !important;
+}

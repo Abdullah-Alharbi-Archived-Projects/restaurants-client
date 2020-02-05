@@ -69,6 +69,7 @@ class SignUp extends Component {
                   placeholder="Enter Your First Name"
                   onChange={this.handleChange}
                   value={firstName}
+                  autoComplete="off"
                 />
               </div>
               <div className="mt-15">
@@ -81,6 +82,7 @@ class SignUp extends Component {
                   placeholder="Enter Your Last Name"
                   onChange={this.handleChange}
                   value={lastName}
+                  autoComplete="off"
                 />
               </div>
               <div className="mt-15">
@@ -93,6 +95,7 @@ class SignUp extends Component {
                   placeholder="Enter Your Email"
                   onChange={this.handleChange}
                   value={email}
+                  autoComplete="off"
                 />
               </div>
               <div className="mt-15">
@@ -105,6 +108,7 @@ class SignUp extends Component {
                   placeholder="Enter Your Password"
                   onChange={this.handleChange}
                   value={password}
+                  autoComplete="off"
                 />
               </div>
               <div className="mt-15 ">

@@ -34,7 +34,7 @@ const Restaurants = ({
     props.history.push("/");
   };
 
-  const isOwner = authenticated ? props.userId === restaurant.user._id : false;
+  // const isOwner = authenticated ? props.userId === restaurant.user._id : false;
 
   return (
     <div className="restaurant-page w-100 mt-105 animated fadeIn">
@@ -48,7 +48,9 @@ const Restaurants = ({
         explicabo? Hic repudiandae totam eaque aspernatur ut nesciunt deleniti
         numquam?"
               title={restaurant.name}
-              isOwner={isOwner}
+              isOwner={
+                authenticated ? props.userId === restaurant.user._id : false
+              }
               component={() => (
                 <React.Fragment>
                   <Button
@@ -143,7 +145,9 @@ const Restaurants = ({
                 description={item.description}
                 title={item.title}
                 variant="h4"
-                isOwner={isOwner}
+                isOwner={
+                  authenticated ? props.userId === restaurant.user._id : false
+                }
                 component={() => (
                   <React.Fragment>
                     <Button

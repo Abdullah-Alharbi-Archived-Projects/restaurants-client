@@ -57,6 +57,7 @@ class EditItem extends Component {
               variant="outlined"
               placeholder="Enter Title"
               className="w-20"
+              autoComplete="off"
               label="Title"
               id="title"
               name="title"
@@ -70,6 +71,7 @@ class EditItem extends Component {
               placeholder="Press shift + enter for new line"
               multiline
               className="w-20"
+              autoComplete="off"
               label="Description"
               id="description"
               name="description"

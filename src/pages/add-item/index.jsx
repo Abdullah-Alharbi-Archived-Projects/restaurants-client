@@ -46,6 +46,7 @@ class AddItem extends Component {
               id="title"
               name="title"
               value={title}
+              autoComplete="off"
               onChange={this.handleChange}
             />
           </div>
@@ -60,6 +61,7 @@ class AddItem extends Component {
               name="description"
               value={description}
               onChange={this.handleChange}
+              autoComplete="off"
             />
           </div>
           <div className="mb-10 w-100 flex flex-center">

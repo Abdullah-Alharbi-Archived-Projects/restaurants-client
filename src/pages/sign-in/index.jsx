@@ -70,6 +70,7 @@ class SignIn extends Component {
                   name="email"
                   onChange={this.handleChange}
                   value={this.state.email}
+                  autoComplete="off"
                 />
               </div>
               <div className="mt-15">
@@ -82,6 +83,7 @@ class SignIn extends Component {
                   name="password"
                   onChange={this.handleChange}
                   value={this.state.password}
+                  autoComplete="off"
                 />
               </div>
               <div className="mt-15 ">

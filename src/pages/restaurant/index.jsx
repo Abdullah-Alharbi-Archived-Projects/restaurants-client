@@ -34,12 +34,20 @@ const Restaurants = ({
     props.history.push("/");
   };
 
+  let owner = null;
+  if (authenticated) {
+    if (restaurant) {
+      if (restaurant.user == props.userId) owner = true;
+      else if (restaurant.user._id === props.userId) owner = true;
+      else owner = false;
+    } else owner = false;
+  } else owner = false;
+
   // const isOwner = authenticated ? props.userId === restaurant.user._id : false;
 
   let images = [];
   if (restaurant) {
-    if (restaurant.images.length > 0)
-      images = restaurant.images.map(image => image.path);
+    if (restaurant.images.length > 0) images = restaurant.images;
     else {
       for (let i = 0; i < 5; i++) {
         images.push("https://via.placeholder.com/500x500");
@@ -63,9 +71,7 @@ const Restaurants = ({
         explicabo? Hic repudiandae totam eaque aspernatur ut nesciunt deleniti
         numquam?"
               title={restaurant.name}
-              isOwner={
-                authenticated ? props.userId === restaurant.user._id : false
-              }
+              isOwner={owner}
               component={() => (
                 <React.Fragment>
                   <Button
@@ -122,12 +128,13 @@ const Restaurants = ({
             images.map(image => (
               <React.Fragment>
                 <img
-                  src={image}
+                  src={image.path ? image.path : image}
                   onDragStart={handleOnDragStart}
                   className="five"
                   alt="smth"
                 />
-                <p>{image._id}</p>
+                {image && <p>{image._id}</p>}
+                {}
               </React.Fragment>
             ))
           ) : (

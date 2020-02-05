@@ -29,13 +29,22 @@ const Item = ({ match, restaurants, authenticated, ...props }) => {
 
   let images = [];
   if (item) {
-    if (item.images.length > 0) images = item.images.map(image => image.path);
+    if (item.images.length > 0) images = item.images;
     else {
       for (let i = 0; i < 5; i++) {
         images.push("https://via.placeholder.com/500x500");
       }
     }
   }
+
+  let owner = null;
+  if (authenticated) {
+    if (restaurant) {
+      if (restaurant.user == props.userId) owner = true;
+      else if (restaurant.user._id === props.userId) owner = true;
+      else owner = false;
+    } else owner = false;
+  } else owner = false;
 
   return (
     <div className="item-page w-100 mt-105 animated fadeIn">
@@ -51,7 +60,7 @@ const Item = ({ match, restaurants, authenticated, ...props }) => {
               description={item.description}
               title={item.title}
             />
-            {authenticated && (
+            {owner && (
               <React.Fragment>
                 <Button
                   component={Link}
@@ -75,7 +84,7 @@ const Item = ({ match, restaurants, authenticated, ...props }) => {
               ? images.map(image => (
                   <React.Fragment>
                     <img
-                      src={image}
+                      src={image.path ? image.path : image}
                       onDragStart={handleOnDragStart}
                       className="five"
                       alt="smth"

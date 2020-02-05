@@ -36,6 +36,17 @@ const Restaurants = ({
 
   // const isOwner = authenticated ? props.userId === restaurant.user._id : false;
 
+  let images = [];
+  if (restaurant) {
+    if (restaurant.images.length > 0)
+      images = restaurant.images.map(image => image.path);
+    else {
+      for (let i = 0; i < 5; i++) {
+        images.push("https://via.placeholder.com/500x500");
+      }
+    }
+  }
+
   return (
     <div className="restaurant-page w-100 mt-105 animated fadeIn">
       <Container>
@@ -43,8 +54,9 @@ const Restaurants = ({
           <div>
             <TopInfo
               image={
-                restaurant.logoPath.path ||
-                "https://via.placeholder.com/200x200"
+                restaurant.logoPath
+                  ? restaurant.logoPath.path
+                  : "https://via.placeholder.com/200x200"
               }
               description="Lorem ipsum, dolor sit amet consectetur adipisicing elit. Similique sint
         placeat natus, beatae modi animi, unde dolore culpa harum, consectetur
@@ -106,48 +118,21 @@ const Restaurants = ({
 
       <Grid container justify="center" alignItems="center" className="mt-20">
         <AliceCarousel mouseTrackingEnabled responsive={{ 0: { items: 3 } }}>
-          {/* {restaurant && restaurant.images.length
-            ? restaurant.images.map(image => (
+          {restaurant ? (
+            images.map(image => (
+              <React.Fragment>
                 <img
-                  src={image.path}
+                  src={image}
                   onDragStart={handleOnDragStart}
-                  className="yours-custom-class"
+                  className="five"
                   alt="smth"
                 />
-              ))
-            : undefined} */}
-
-          {restaurant && restaurant.images.length ? (
-            restaurant.images.map(image => (
-              <img
-                src={image.path}
-                onDragStart={handleOnDragStart}
-                className="five"
-                alt="smth"
-              />
+                <p>{image._id}</p>
+              </React.Fragment>
             ))
           ) : (
             <CircularProgress />
           )}
-
-          {/* <img
-            src="https://via.placeholder.com/500x500"
-            onDragStart={handleOnDragStart}
-            className="yours-custom-class"
-            alt="smth"
-          />
-          <img
-            src="https://via.placeholder.com/500x500"
-            onDragStart={handleOnDragStart}
-            className="yours-custom-class"
-            alt="smth"
-          />
-          <img
-            src="https://via.placeholder.com/500x500"
-            onDragStart={handleOnDragStart}
-            className="yours-custom-class"
-            alt="smth"
-          /> */}
         </AliceCarousel>
         <hr style={{ width: "80%" }} />
       </Grid>
@@ -158,7 +143,9 @@ const Restaurants = ({
             <div key={item._id}>
               <TopInfo
                 image={
-                  item.images[0].path || "https://via.placeholder.com/200x200"
+                  item.images[0]
+                    ? item.images[0].path
+                    : "https://via.placeholder.com/200x200"
                 }
                 description={item.description}
                 title={item.title}

@@ -27,6 +27,16 @@ const Item = ({ match, restaurants, authenticated, ...props }) => {
     props.history.push(`/restaurant/${id}`);
   };
 
+  let images = [];
+  if (item) {
+    if (item.images.length > 0) images = item.images.map(image => image.path);
+    else {
+      for (let i = 0; i < 5; i++) {
+        images.push("https://via.placeholder.com/500x500");
+      }
+    }
+  }
+
   return (
     <div className="item-page w-100 mt-105 animated fadeIn">
       <Container>
@@ -34,7 +44,9 @@ const Item = ({ match, restaurants, authenticated, ...props }) => {
           <div>
             <TopInfo
               image={
-                item.images[0].path || "https://via.placeholder.com/200x200"
+                item.images[0]
+                  ? item.images[0].path
+                  : "https://via.placeholder.com/200x200"
               }
               description={item.description}
               title={item.title}
@@ -57,38 +69,23 @@ const Item = ({ match, restaurants, authenticated, ...props }) => {
       </Container>
 
       <Grid container justify="center" alignItems="center" className="mt-20">
-        <AliceCarousel mouseTrackingEnabled responsive={{ 0: { items: 3 } }}>
-          {item && item.images.length ? (
-            item.images.map(image => (
-              <img
-                src={image.path}
-                onDragStart={handleOnDragStart}
-                className="five"
-                alt="smth"
-              />
-            ))
-          ) : (
-            <CircularProgress />
-          )}
-          {/* <img
-            src="https://via.placeholder.com/500x500"
-            onDragStart={handleOnDragStart}
-            className="yours-custom-class"
-            alt="smth"
-          />
-          <img
-            src="https://via.placeholder.com/500x500"
-            onDragStart={handleOnDragStart}
-            className="yours-custom-class"
-            alt="smth"
-          />
-          <img
-            src="https://via.placeholder.com/500x500"
-            onDragStart={handleOnDragStart}
-            className="yours-custom-class"
-            alt="smth"
-          /> */}
-        </AliceCarousel>
+        {item.images && (
+          <AliceCarousel mouseTrackingEnabled responsive={{ 0: { items: 3 } }}>
+            {item
+              ? images.map(image => (
+                  <React.Fragment>
+                    <img
+                      src={image}
+                      onDragStart={handleOnDragStart}
+                      className="five"
+                      alt="smth"
+                    />
+                    <p>{image._id}</p>
+                  </React.Fragment>
+                ))
+              : null}
+          </AliceCarousel>
+        )}
       </Grid>
     </div>
   );

@@ -16,7 +16,9 @@ const CardC = ({ title = "Test", image = "", restaurant = {}, id }) => {
         <CardMedia
           style={{ height: 140 }}
           image={
-            restaurant.logoPath.path || "https://via.placeholder.com/200x200"
+            restaurant.logoPath
+              ? restaurant.logoPath.path
+              : "https://via.placeholder.com/200x200"
           }
           title={title}
         />

@@ -15,7 +15,9 @@ const CardC = ({ title = "Test", image = "", restaurant = {}, id }) => {
       <CardActionArea component={Link} to={`/restaurant/${id}`}>
         <CardMedia
           style={{ height: 140 }}
-          image="https://via.placeholder.com/200x200"
+          image={
+            restaurant.logoPath.path || "https://via.placeholder.com/200x200"
+          }
           title={title}
         />
         <CardContent>

@@ -31,3 +31,8 @@
 .w-800 {
   width: 90%;
 }
+
+.preview-container img {
+  width: 200px;
+  height: 200px;
+}

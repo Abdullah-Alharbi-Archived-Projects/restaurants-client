@@ -42,7 +42,10 @@ const Restaurants = ({
         {restaurant ? (
           <div>
             <TopInfo
-              image="https://via.placeholder.com/200x200"
+              image={
+                restaurant.logoPath.path ||
+                "https://via.placeholder.com/200x200"
+              }
               description="Lorem ipsum, dolor sit amet consectetur adipisicing elit. Similique sint
         placeat natus, beatae modi animi, unde dolore culpa harum, consectetur
         explicabo? Hic repudiandae totam eaque aspernatur ut nesciunt deleniti
@@ -114,7 +117,20 @@ const Restaurants = ({
               ))
             : undefined} */}
 
-          <img
+          {restaurant && restaurant.images.length ? (
+            restaurant.images.map(image => (
+              <img
+                src={image.path}
+                onDragStart={handleOnDragStart}
+                className="five"
+                alt="smth"
+              />
+            ))
+          ) : (
+            <CircularProgress />
+          )}
+
+          {/* <img
             src="https://via.placeholder.com/500x500"
             onDragStart={handleOnDragStart}
             className="yours-custom-class"
@@ -131,7 +147,7 @@ const Restaurants = ({
             onDragStart={handleOnDragStart}
             className="yours-custom-class"
             alt="smth"
-          />
+          /> */}
         </AliceCarousel>
         <hr style={{ width: "80%" }} />
       </Grid>
@@ -141,7 +157,9 @@ const Restaurants = ({
           {restaurant.menu.map(item => (
             <div key={item._id}>
               <TopInfo
-                image={"https://via.placeholder.com/200x200"}
+                image={
+                  item.images[0].path || "https://via.placeholder.com/200x200"
+                }
                 description={item.description}
                 title={item.title}
                 variant="h4"
@@ -150,15 +168,6 @@ const Restaurants = ({
                 }
                 component={() => (
                   <React.Fragment>
-                    <Button
-                      component={Link}
-                      variant="outlined"
-                      className="w-100"
-                      color="primary"
-                      to={`/restaurant/${id}/item/${item._id}`}
-                    >
-                      Visit
-                    </Button>
                     <div className="mt-25 mb-25"></div>
                     <Button
                       component={Link}
@@ -181,6 +190,15 @@ const Restaurants = ({
                   </React.Fragment>
                 )}
               />
+              <Button
+                component={Link}
+                variant="outlined"
+                // className="w-100"
+                color="primary"
+                to={`/restaurant/${id}/item/${item._id}`}
+              >
+                Visit
+              </Button>
             </div>
           ))}
         </Container>

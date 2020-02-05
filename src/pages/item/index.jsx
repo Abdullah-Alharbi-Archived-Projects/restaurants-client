@@ -28,12 +28,14 @@ const Item = ({ match, restaurants, authenticated, ...props }) => {
   };
 
   return (
-    <div className="w-100 mt-105 animated fadeIn">
+    <div className="item-page w-100 mt-105 animated fadeIn">
       <Container>
         {item ? (
           <div>
             <TopInfo
-              image={item.images[0] || "https://via.placeholder.com/200x200"}
+              image={
+                item.images[0].path || "https://via.placeholder.com/200x200"
+              }
               description={item.description}
               title={item.title}
             />
@@ -56,7 +58,19 @@ const Item = ({ match, restaurants, authenticated, ...props }) => {
 
       <Grid container justify="center" alignItems="center" className="mt-20">
         <AliceCarousel mouseTrackingEnabled responsive={{ 0: { items: 3 } }}>
-          <img
+          {item && item.images.length ? (
+            item.images.map(image => (
+              <img
+                src={image.path}
+                onDragStart={handleOnDragStart}
+                className="five"
+                alt="smth"
+              />
+            ))
+          ) : (
+            <CircularProgress />
+          )}
+          {/* <img
             src="https://via.placeholder.com/500x500"
             onDragStart={handleOnDragStart}
             className="yours-custom-class"
@@ -73,7 +87,7 @@ const Item = ({ match, restaurants, authenticated, ...props }) => {
             onDragStart={handleOnDragStart}
             className="yours-custom-class"
             alt="smth"
-          />
+          /> */}
         </AliceCarousel>
       </Grid>
     </div>

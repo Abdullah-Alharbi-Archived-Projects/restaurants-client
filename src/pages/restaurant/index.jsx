@@ -157,9 +157,7 @@ const Restaurants = ({
                 description={item.description}
                 title={item.title}
                 variant="h4"
-                isOwner={
-                  authenticated ? props.userId === restaurant.user._id : false
-                }
+                isOwner={owner}
                 component={() => (
                   <React.Fragment>
                     <div className="mt-25 mb-25"></div>

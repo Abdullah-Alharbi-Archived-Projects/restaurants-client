@@ -40,7 +40,7 @@ const Item = ({ match, restaurants, authenticated, ...props }) => {
   let owner = null;
   if (authenticated) {
     if (restaurant) {
-      if (restaurant.user == props.userId) owner = true;
+      if (restaurant.user === props.userId) owner = true;
       else if (restaurant.user._id === props.userId) owner = true;
       else owner = false;
     } else owner = false;

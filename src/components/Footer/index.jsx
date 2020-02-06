@@ -4,8 +4,9 @@ import "./style.css";
 const Footer = ({ text = "Buily By Abdullah Alharbi" }) => {
   return (
     <footer>
-      <h3>Copyrights 2020 &copy;</h3>
-      <h4>{text}</h4>
+      <h3></h3>
+      <p>Copyrights 2020 &copy;</p>
+      <p>{text}</p>
     </footer>
   );
 };

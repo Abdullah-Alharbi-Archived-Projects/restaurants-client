@@ -77,7 +77,13 @@ const Item = ({ match, restaurants, authenticated, ...props }) => {
         )}
       </Container>
 
-      <Grid container justify="center" alignItems="center" className="mt-20">
+      <Grid
+        container
+        justify="center"
+        alignItems="center"
+        className="mt-20"
+        style={{ marginLeft: 35 }}
+      >
         {item.images && (
           <AliceCarousel mouseTrackingEnabled responsive={{ 0: { items: 3 } }}>
             {item

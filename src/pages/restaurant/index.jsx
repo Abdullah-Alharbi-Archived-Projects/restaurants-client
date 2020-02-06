@@ -122,7 +122,13 @@ const Restaurants = ({
         )}
       </Container>
 
-      <Grid container justify="center" alignItems="center" className="mt-20">
+      <Grid
+        container
+        justify="center"
+        alignItems="center"
+        className="mt-20"
+        style={{ marginLeft: 35 }}
+      >
         <AliceCarousel mouseTrackingEnabled responsive={{ 0: { items: 3 } }}>
           {restaurant ? (
             images.map(image => (
